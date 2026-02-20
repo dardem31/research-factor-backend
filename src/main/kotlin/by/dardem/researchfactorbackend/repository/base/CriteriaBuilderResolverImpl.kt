@@ -51,6 +51,23 @@ abstract class CriteriaBuilderResolverImpl<T>(
             ).singleResultOrNull
         }.awaitSuspending()
 
+    override suspend fun exists(criteriaFunction: CriteriaFunction<T>): Boolean =
+        sessionFactory.withSession { session ->
+
+            val builder = session.criteriaBuilder
+            val query = builder.createQuery(Int::class.java)
+            val root = query.from(clazz)
+
+            val predicates = criteriaFunction.apply(root, builder)
+
+            query.select(builder.literal(1))
+                .where(*predicates.toTypedArray())
+
+            session.createQuery(query)
+                .setMaxResults(1)
+                .resultList
+        }.awaitSuspending().isNotEmpty()
+
     private fun <T> prepareQueryContext(clazz: Class<T>, session: Session): QueryContext<T> {
         val builder = session.criteriaBuilder
         val query = builder.createQuery(clazz)

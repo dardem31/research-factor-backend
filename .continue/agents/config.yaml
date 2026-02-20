@@ -1,19 +1,29 @@
-name: My Config
+name: ResearchFactor Backend Config
 version: 0.0.1
 schema: v1
 
 models:
-  - name: test model
-    provider: openrouter
-    model: liquid/lfm-2.5-1.2b-thinking:free
-    apiBase: https://openrouter.ai/api/v1
-    apiKey: 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
-
   - name: anthropic/claude-sonnet-4.5
     provider: openrouter
     model: anthropic/claude-sonnet-4.5
     apiBase: https://openrouter.ai/api/v1
     apiKey: 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
+  - name: google/gemini-3-flash-preview
+    provider: openrouter
+    model: google/gemini-3-flash-preview
+    apiBase: https://openrouter.ai/api/v1
+    apiKey: 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
+  - name: moonshotai/kimi-k2.5
+    provider: openrouter
+    model: moonshotai/kimi-k2.5
+    apiBase: https://openrouter.ai/api/v1
+    apiKey: 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
+  - name: anthropic/claude-opus-4.6
+    provider: openrouter
+    model: anthropic/claude-opus-4.6
+    apiBase: https://openrouter.ai/api/v1
+    apiKey: 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
+    timeout: 600000
 
   - name: qwen2.5-coder 1.5b
     provider: ollama
@@ -31,8 +41,6 @@ contextProviders:
     params:
       files:
         - README.md
-        - ARCHITECTURE.md
-        - docs/coding-standards.md
 
   # Поиск по кодовой базе
   - name: code
@@ -41,20 +49,6 @@ contextProviders:
 
   # Текущая открытая директория
   - name: folder
-
-# Слэш-команды для быстрых действий
-slashCommands:
-  - name: review
-    description: Review code for Kotlin and Spring best practices
-    prompt: |
-      Review this code following our project standards:
-      {{{ input }}}
-
-  - name: refactor
-    description: Suggest refactoring following our coding rules
-    prompt: |
-      Suggest refactoring improvements:
-      {{{ input }}}
 
 # Настройки табуляции и авто-комплита
 tabAutocompleteModel:

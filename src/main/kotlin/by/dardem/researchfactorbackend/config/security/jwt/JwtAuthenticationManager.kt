@@ -1,7 +1,7 @@
 package by.dardem.researchfactorbackend.config.security.jwt
 
 import by.dardem.researchfactorbackend.config.security.AuthenticatedUser
-import by.dardem.researchfactorbackend.service.JwtService
+import by.dardem.researchfactorbackend.service.infrustructure.jwt.JwtService
 import by.dardem.researchfactorbackend.service.dataProviders.UserDataProvider
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken

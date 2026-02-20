@@ -6,6 +6,12 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <include file="migration/tables/001.users-table.sql" />
+    <include file="migration/tables/002.research-core-tables.sql" />
+    <include file="migration/tables/003.subjects-tables.sql" />
+    <include file="migration/tables/004.research-line-tables.sql" />
+    <include file="migration/tables/005.execution-and-artifacts.sql" />
+    <include file="migration/tables/006.objectives-and-reports.sql" />
+    <include file="migration/tables/007.adverse-events-and-audit.sql" />
 
     <!-- ChangeSet for ALL the VIEWS to make sure that data structure is not broken  -->
     <changeSet id="views-observer" author="Roman Lukashenko" runAlways="true">
