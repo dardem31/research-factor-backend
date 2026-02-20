@@ -1,0 +1,19 @@
+hibernate:
+  reactive:
+    url: ${DATABASE_URL}
+    pool-size: 90
+    dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    format-sql: false
+    highlight-sql: false
+    schema-action: none
+
+log:
+  console:
+    log-level: INFO
+
+jwt:
+  secret: ${JWT_SECRET}
+  issuer: research-factor
+  ttl-seconds: 3600
+  cookie-name: research_api

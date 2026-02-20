@@ -1,0 +1,21 @@
+hibernate:
+  reactive:
+    url: postgresql://localhost:5432/research_factor
+    username: researchfactor
+    password: k2N8TmavYVRKz6jAbCG
+    pool-size: 10
+    dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    format-sql: false
+    highlight-sql: false
+    schema-action: none
+
+log:
+  console:
+    log-level: INFO
+
+jwt:
+  secret: dev_env
+  issuer: research-factor
+  ttl-seconds: 3600
+  cookie-name: research_api
