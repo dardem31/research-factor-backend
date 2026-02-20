@@ -11,10 +11,11 @@ class ArtifactRepositoryImpl(
     sessionFactory: Mutiny.SessionFactory
 ) : AbstractReactiveCrudDao<Artifact, Long>(Artifact::class.java, sessionFactory),
     ArtifactRepository {
-    
-    override suspend fun findAllById(ids: List<Long>): List<Artifact> =
-        if (ids.isEmpty()) emptyList() 
-        else findList { root, builder ->
-            mutableListOf(root.get<Long>("id").`in`(ids))
+    override suspend fun existsByIdAndUserId(id: Long, userId: Long): Boolean =
+        exists { root, builder ->
+            mutableListOf(
+                builder.equal(root.get<Long>("id"), id),
+                builder.equal(root.get<Long>("userId"), userId)
+            )
         }
 }

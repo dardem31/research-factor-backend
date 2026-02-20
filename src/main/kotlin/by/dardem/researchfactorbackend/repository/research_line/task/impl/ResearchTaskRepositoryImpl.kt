@@ -11,4 +11,11 @@ class ResearchTaskRepositoryImpl(
     sessionFactory: Mutiny.SessionFactory
 ) : AbstractReactiveCrudDao<ResearchTask, Long>(ResearchTask::class.java, sessionFactory),
     ResearchTaskRepository {
+    override suspend fun existsByIdAndUserId(id: Long, userId: Long): Boolean =
+        exists { root, builder ->
+            mutableListOf(
+                builder.equal(root.get<Long>("id"), id),
+                builder.equal(root.get<Long>("userId"), userId)
+            )
+        }
 }

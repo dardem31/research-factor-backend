@@ -20,6 +20,5 @@ class SubjectUpdate(
     @JoinColumn(name = "subject_update_id", nullable = false)
     var parameterChanges: MutableList<ParameterChange> = mutableListOf(),
 
-    @Column(name = "created_at", nullable = false, updatable = false)
     var createdAt: Instant = Instant.now()
 )

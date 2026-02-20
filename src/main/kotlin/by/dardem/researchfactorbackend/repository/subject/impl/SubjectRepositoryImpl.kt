@@ -10,4 +10,12 @@ import org.springframework.stereotype.Repository
 class SubjectRepositoryImpl(
     sessionFactory: Mutiny.SessionFactory
 ) : AbstractReactiveCrudDao<Subject, Long>(Subject::class.java, sessionFactory),
-    SubjectRepository
+    SubjectRepository {
+    override suspend fun existsByIdAndUserId(id: Long, userId: Long): Boolean =
+        exists { root, builder ->
+            mutableListOf(
+                builder.equal(root.get<Long>("id"), id),
+                builder.equal(root.get<Long>("userId"), userId)
+            )
+        }
+}

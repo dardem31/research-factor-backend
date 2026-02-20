@@ -40,4 +40,6 @@ class SubjectService(
         val savedSubject = save(subject)
         return savedSubject.id!!
     }
+    suspend fun existsByIdAndUserId(id: Long, userId: Long): Boolean =
+        subjectRepository.existsByIdAndUserId(id, userId)
 }
