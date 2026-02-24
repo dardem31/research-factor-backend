@@ -2,11 +2,11 @@ package by.dardem.researchfactorbackend.service.domain.research_line
 
 import by.dardem.researchfactorbackend.domain.dto.research_line.ResearchLineCreateDto
 import by.dardem.researchfactorbackend.domain.entity.research_line.ResearchLine
-import by.dardem.researchfactorbackend.repository.research_line.ResearchLineRepository
-import by.dardem.researchfactorbackend.service.domain.research.ResearchService
+import by.dardem.researchfactorbackend.repository.entity.ResearchLineRepository
 import by.dardem.researchfactorbackend.service.domain.base.BaseService
-import org.springframework.stereotype.Service
+import by.dardem.researchfactorbackend.service.domain.research.ResearchService
 import org.springframework.http.HttpStatus
+import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 @Service

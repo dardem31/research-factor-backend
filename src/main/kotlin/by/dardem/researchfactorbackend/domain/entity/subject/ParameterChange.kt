@@ -10,8 +10,9 @@ class ParameterChange(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column(name = "subject_update_id", nullable = false)
-    var subjectUpdateId: Long,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subject_update_id", nullable = false)
+    val subjectUpdate: SubjectUpdate,
 
     @Column(name = "parameter_id", nullable = false)
     var parameterId: Long,

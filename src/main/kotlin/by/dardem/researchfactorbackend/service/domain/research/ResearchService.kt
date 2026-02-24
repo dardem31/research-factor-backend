@@ -5,7 +5,7 @@ import by.dardem.researchfactorbackend.domain.entity.research.PrimaryOutcome
 import by.dardem.researchfactorbackend.domain.entity.research.Research
 import by.dardem.researchfactorbackend.domain.entity.research.StudyProtocol
 import by.dardem.researchfactorbackend.domain.entity.research.TrackedParameter
-import by.dardem.researchfactorbackend.repository.research.ResearchRepository
+import by.dardem.researchfactorbackend.repository.entity.ResearchRepository
 import by.dardem.researchfactorbackend.service.domain.base.BaseService
 import org.springframework.stereotype.Service
 
@@ -22,8 +22,7 @@ class ResearchService(
             title = dto.title,
             userId = userId,
             hypothesis = dto.hypothesis,
-            description = dto.description,
-            blindingType = dto.blindingType
+            description = dto.description
         )
 
         // Маппим протокол
@@ -51,9 +50,7 @@ class ResearchService(
             TrackedParameter(
                 research = research,
                 name = it.name,
-                unit = it.unit,
-                referenceMin = it.referenceMin,
-                referenceMax = it.referenceMax
+                unit = it.unit
             )
         }.toMutableList()
 

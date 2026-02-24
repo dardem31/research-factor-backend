@@ -1,44 +1,19 @@
 package by.dardem.researchfactorbackend.repository.base.view
 
+import by.dardem.researchfactorbackend.domain.dto.filter.ListFilter
+import by.dardem.researchfactorbackend.domain.dto.filter.PageableDto
 import by.dardem.researchfactorbackend.domain.enums.PaginationOrderEnum
-import by.dardem.researchfactorbackend.domain.filter.ListFilter
-import by.dardem.researchfactorbackend.domain.filter.PageableDto
 import by.dardem.researchfactorbackend.domain.util.SearchResultDto
-import by.dardem.researchfactorbackend.repository.base.CriteriaBuilderResolverImpl
 import by.dardem.researchfactorbackend.repository.base.CriteriaFunction
 import io.smallrye.mutiny.coroutines.awaitSuspending
-import jakarta.persistence.criteria.CriteriaBuilder
-import jakarta.persistence.criteria.CriteriaQuery
-import jakarta.persistence.criteria.Order
-import jakarta.persistence.criteria.Root
+import jakarta.persistence.criteria.*
 import org.hibernate.reactive.mutiny.Mutiny
 import org.hibernate.reactive.mutiny.Mutiny.Session
 
-class SearchCriteriaResolverImpl<T>(
-    private val sessionFactory: Mutiny.SessionFactory,
-    private val clazz: Class<T>
+open class SearchCriteriaResolverImpl<T>(
+    private val clazz: Class<T>,
+    private val sessionFactory: Mutiny.SessionFactory
 ) : SearchCriteriaResolver<T> {
-
-    override suspend fun <R> resolvePredicates(
-        searchCriteria: ListFilter,
-        criteriaFunction: CriteriaFunction<T>,
-        convertToDto: (T) -> R
-    ): SearchResultDto<R> {
-        val pagination: PageableDto = searchCriteria.pagination
-
-        pagination.limit += 1
-        var searchResult = resolvePredicates(criteriaFunction, pagination)
-        val hasMore = searchResult.size == pagination.limit
-        if (hasMore) {
-            searchResult = if (PaginationOrderEnum.prev == searchCriteria.pagination.order) {
-                searchResult.drop(1)
-            } else {
-                searchResult.dropLast(1)
-            }
-        }
-
-        return SearchResultDto.fromList(searchResult, hasMore, convertToDto)
-    }
 
     override suspend fun resolvePredicates(
         searchCriteria: ListFilter,
@@ -101,6 +76,28 @@ class SearchCriteriaResolverImpl<T>(
                 if (order?.isAscending == true) list.reversed() else list
             }
     }
+    override suspend fun findList(
+        criteriaFunction: CriteriaFunction<T>
+    ): List<T> =
+        sessionFactory.withSession { session ->
+            val context = prepareQueryContext(clazz, session)
+            val predicates = criteriaFunction.apply(context.root, context.builder)
+
+            session.createQuery(
+                context.query.select(context.root).where(*predicates.toTypedArray<Predicate?>())
+            ).resultList
+        }.awaitSuspending()
+
+    override suspend fun find(criteriaFunction: CriteriaFunction<T>): T? =
+        sessionFactory.withSession { session ->
+            val context = prepareQueryContext(clazz, session)
+            val predicates = criteriaFunction.apply(context.root, context.builder)
+
+            session.createQuery(
+                context.query.select(context.root)
+                    .where(*predicates.toTypedArray())
+            ).singleResultOrNull
+        }.awaitSuspending()
 
     companion object {
 

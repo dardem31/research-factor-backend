@@ -5,7 +5,7 @@ CREATE TYPE artifact_type AS ENUM ('RAW_DATA', 'PHOTO', 'CODE', 'CONFIG', 'ETHIC
 CREATE TABLE artifacts
 (
     id          BIGSERIAL PRIMARY KEY,
-    user_id     BIGINT        NOT NULL REFERENCES user (id) ON DELETE CASCADE,
+    user_id     BIGINT        NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     type        artifact_type NOT NULL,
     storage_url TEXT          NOT NULL,
     sha256      VARCHAR(64)   NOT NULL,

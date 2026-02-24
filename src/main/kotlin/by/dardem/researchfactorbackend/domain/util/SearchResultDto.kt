@@ -18,12 +18,5 @@ data class SearchResultDto<R>(
                 hasMore = searchResult.hasNext()
             )
         }
-
-        fun <T, R> fromList(searchResult: List<T>, hasMore: Boolean, convertToDto: (T) -> R): SearchResultDto<R> {
-            return SearchResultDto(
-                items = searchResult.map(convertToDto),
-                hasMore = hasMore
-            )
-        }
     }
 }

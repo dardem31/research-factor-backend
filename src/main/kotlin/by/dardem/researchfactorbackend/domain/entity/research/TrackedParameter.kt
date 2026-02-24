@@ -1,7 +1,6 @@
 package by.dardem.researchfactorbackend.domain.entity.research
 
 import jakarta.persistence.*
-import java.math.BigDecimal
 
 @Entity
 @Table(name = "tracked_parameters")
@@ -18,11 +17,5 @@ class TrackedParameter(
     var name: String,
 
     @Column(nullable = false)
-    var unit: String,
-
-    @Column(name = "reference_min")
-    var referenceMin: BigDecimal? = null,
-
-    @Column(name = "reference_max")
-    var referenceMax: BigDecimal? = null
+    var unit: String
 )

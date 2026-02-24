@@ -2,7 +2,7 @@ package by.dardem.researchfactorbackend.service.domain.research_line.task
 
 import by.dardem.researchfactorbackend.domain.dto.research_line.task.ResearchTaskCreateDto
 import by.dardem.researchfactorbackend.domain.entity.research_line.ResearchTask
-import by.dardem.researchfactorbackend.repository.research_line.task.ResearchTaskRepository
+import by.dardem.researchfactorbackend.repository.entity.ResearchTaskRepository
 import by.dardem.researchfactorbackend.service.domain.base.BaseService
 import by.dardem.researchfactorbackend.service.domain.research_line.ResearchLineService
 import org.springframework.http.HttpStatus

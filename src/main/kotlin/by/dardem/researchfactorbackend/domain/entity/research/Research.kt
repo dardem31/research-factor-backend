@@ -2,10 +2,8 @@ package by.dardem.researchfactorbackend.domain.entity.research
 
 import by.dardem.researchfactorbackend.domain.enums.BlindingType
 import by.dardem.researchfactorbackend.domain.enums.ResearchStatus
+import by.dardem.researchfactorbackend.domain.util.AuditableEntity
 import jakarta.persistence.*
-import org.hibernate.annotations.CreationTimestamp
-import org.hibernate.annotations.UpdateTimestamp
-import java.time.Instant
 
 @Entity
 @Table(name = "research")
@@ -41,15 +39,7 @@ class Research(
     var primaryOutcomes: MutableList<PrimaryOutcome> = mutableListOf(),
 
     @OneToMany(mappedBy = "research", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-    var trackedParameters: MutableList<TrackedParameter> = mutableListOf(),
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    var createdAt: Instant? = null,
-
-    @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false)
-    var updatedAt: Instant? = null
-)
+    var trackedParameters: MutableList<TrackedParameter> = mutableListOf()
+) : AuditableEntity()
 
 

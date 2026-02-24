@@ -1,13 +1,9 @@
 package by.dardem.researchfactorbackend.domain.dto.research
 
-import by.dardem.researchfactorbackend.domain.enums.BlindingType
-import java.math.BigDecimal
-
 data class ResearchCreateDto(
     val title: String,
     val hypothesis: String,
     val description: String,
-    val blindingType: BlindingType,
     val protocol: ProtocolCreateDto,
     val primaryOutcomes: List<PrimaryOutcomeCreateDto>,
     val trackedParameters: List<TrackedParameterCreateDto>
@@ -31,7 +27,5 @@ data class PrimaryOutcomeCreateDto(
 
 data class TrackedParameterCreateDto(
     val name: String,
-    val unit: String,
-    val referenceMin: BigDecimal?,
-    val referenceMax: BigDecimal?
+    val unit: String
 )

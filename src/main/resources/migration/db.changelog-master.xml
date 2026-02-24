@@ -15,7 +15,7 @@
 
     <!-- ChangeSet for ALL the VIEWS to make sure that data structure is not broken  -->
     <changeSet id="views-observer" author="Roman Lukashenko" runAlways="true">
-
+        <sqlFile path="migration/view/vw_research_overview_item.sql"/>
     </changeSet>
 
     <!-- Post-migration cleanup to deallocate prepared statements -->

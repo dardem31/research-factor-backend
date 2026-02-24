@@ -4,7 +4,7 @@ import by.dardem.researchfactorbackend.domain.dto.execution.LogEntryCreateDto
 import by.dardem.researchfactorbackend.domain.entity.research_line.LogEntry
 import by.dardem.researchfactorbackend.domain.entity.subject.ParameterChange
 import by.dardem.researchfactorbackend.domain.entity.subject.SubjectUpdate
-import by.dardem.researchfactorbackend.repository.execution.LogEntryRepository
+import by.dardem.researchfactorbackend.repository.entity.LogEntryRepository
 import by.dardem.researchfactorbackend.service.domain.artifact.ArtifactService
 import by.dardem.researchfactorbackend.service.domain.base.BaseService
 import by.dardem.researchfactorbackend.service.domain.subject.SubjectService
@@ -30,9 +30,9 @@ class LogEntryService(
         if (dto.artifactIds.isNotEmpty()) {
             for (artifactId in dto.artifactIds) {
                 if (!artifactService.existsByIdAndUserId(artifactId, userId)) {
-                throw ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid artifacts or permission denied")
+                    throw ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid artifacts or permission denied")
+                }
             }
-        }
         }
 
         // 3. Проверяем каждого сабъекта на корректность владельца
@@ -52,17 +52,18 @@ class LogEntryService(
         )
 
         logEntry.subjectUpdates = dto.subjectUpdates.map { updateDto ->
-            SubjectUpdate(
-                subjectId = updateDto.subjectId,
-                parameterChanges = updateDto.parameterChanges.map { changeDto ->
-                    ParameterChange(
-                        subjectUpdateId = 0, // Hibernate set it automatically
-                        parameterId = changeDto.parameterId,
-                        previousValue = changeDto.previousValue,
-                        newValue = changeDto.newValue
-                    )
-                }.toMutableList()
+            val subjectUpdate = SubjectUpdate(
+                subjectId = updateDto.subjectId
             )
+            subjectUpdate.parameterChanges = updateDto.parameterChanges.map { changeDto ->
+                ParameterChange(
+                    subjectUpdate = subjectUpdate,
+                    parameterId = changeDto.parameterId,
+                    previousValue = changeDto.previousValue,
+                    newValue = changeDto.newValue
+                )
+            }.toMutableList()
+            subjectUpdate
         }.toMutableList()
 
         val saved = save(logEntry)

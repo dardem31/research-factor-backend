@@ -1,0 +1,6 @@
+package by.dardem.researchfactorbackend.repository.view
+
+import by.dardem.researchfactorbackend.domain.dto.view.ResearchOverviewItem
+import by.dardem.researchfactorbackend.repository.base.view.SearchCriteriaResolver
+
+interface ResearchOverviewItemRepository : SearchCriteriaResolver<ResearchOverviewItem>

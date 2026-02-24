@@ -6,7 +6,7 @@ CREATE TYPE blinding_type AS ENUM ('OPEN', 'SINGLE_BLIND', 'DOUBLE_BLIND', 'BLIN
 CREATE TABLE research
 (
     id            BIGSERIAL PRIMARY KEY,
-    user_id       BIGINT          NOT NULL REFERENCES user (id) ON DELETE CASCADE,
+    user_id       BIGINT          NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     title         VARCHAR(255)    NOT NULL,
     hypothesis    TEXT            NOT NULL,
     description   TEXT            NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE primary_outcomes
 CREATE TABLE subject_groups
 (
     id          BIGSERIAL PRIMARY KEY,
-    user_id     BIGINT       NOT NULL REFERENCES user (id) ON DELETE CASCADE,
+    user_id     BIGINT       NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     research_id BIGINT       NOT NULL REFERENCES research (id) ON DELETE CASCADE,
     label       VARCHAR(255) NOT NULL,
     description TEXT,

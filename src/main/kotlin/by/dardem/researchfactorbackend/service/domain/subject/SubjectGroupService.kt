@@ -2,7 +2,7 @@ package by.dardem.researchfactorbackend.service.domain.subject
 
 import by.dardem.researchfactorbackend.domain.dto.subject.SubjectGroupCreateDto
 import by.dardem.researchfactorbackend.domain.entity.subject.SubjectGroup
-import by.dardem.researchfactorbackend.repository.subject.SubjectGroupRepository
+import by.dardem.researchfactorbackend.repository.entity.SubjectGroupRepository
 import by.dardem.researchfactorbackend.service.domain.base.BaseService
 import by.dardem.researchfactorbackend.service.domain.research.ResearchService
 import org.springframework.http.HttpStatus

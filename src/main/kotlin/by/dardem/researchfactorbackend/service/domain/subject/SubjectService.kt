@@ -3,7 +3,7 @@ package by.dardem.researchfactorbackend.service.domain.subject
 import by.dardem.researchfactorbackend.domain.dto.subject.SubjectCreateDto
 import by.dardem.researchfactorbackend.domain.entity.subject.ParameterField
 import by.dardem.researchfactorbackend.domain.entity.subject.Subject
-import by.dardem.researchfactorbackend.repository.subject.SubjectRepository
+import by.dardem.researchfactorbackend.repository.entity.SubjectRepository
 import by.dardem.researchfactorbackend.service.domain.base.BaseService
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service

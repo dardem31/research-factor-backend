@@ -16,8 +16,7 @@ class SubjectUpdate(
     @Column(name = "subject_id", nullable = false)
     var subjectId: Long,
 
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    @JoinColumn(name = "subject_update_id", nullable = false)
+    @OneToMany(mappedBy = "subjectUpdate", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     var parameterChanges: MutableList<ParameterChange> = mutableListOf(),
 
     var createdAt: Instant = Instant.now()

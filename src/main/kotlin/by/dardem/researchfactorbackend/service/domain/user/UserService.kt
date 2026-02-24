@@ -3,7 +3,7 @@ package by.dardem.researchfactorbackend.service.domain.user
 import by.dardem.researchfactorbackend.domain.dto.UserDto
 import by.dardem.researchfactorbackend.domain.dto.mappers.UserMapper
 import by.dardem.researchfactorbackend.domain.entity.User
-import by.dardem.researchfactorbackend.repository.UserRepository
+import by.dardem.researchfactorbackend.repository.entity.UserRepository
 import org.springframework.stereotype.Service
 
 @Service

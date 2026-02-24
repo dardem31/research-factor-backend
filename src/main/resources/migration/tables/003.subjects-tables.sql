@@ -5,7 +5,7 @@ CREATE TYPE subject_status AS ENUM ('ACTIVE', 'WITHDRAWN', 'EXCLUDED');
 CREATE TABLE subjects
 (
     id                BIGSERIAL PRIMARY KEY,
-    user_id     BIGINT       NOT NULL REFERENCES user (id) ON DELETE CASCADE,
+    user_id     BIGINT       NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     group_id          BIGINT       NOT NULL REFERENCES subject_groups (id),
     code              VARCHAR(50)  NOT NULL UNIQUE,
     status            subject_status NOT NULL DEFAULT 'ACTIVE',

@@ -7,7 +7,7 @@ CREATE TABLE research_lines
 (
     id                 BIGSERIAL PRIMARY KEY,
     research_id        BIGINT               NOT NULL REFERENCES research (id) ON DELETE CASCADE,
-    user_id            BIGINT               NOT NULL REFERENCES user (id) ON DELETE CASCADE,
+    user_id            BIGINT               NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     sequence_order     INT                  NOT NULL,
     title              VARCHAR(255)         NOT NULL,
     duration           VARCHAR(50),
@@ -32,7 +32,7 @@ CREATE TABLE research_tasks
 (
     id               BIGSERIAL PRIMARY KEY,
     research_line_id BIGINT               NOT NULL REFERENCES research_lines (id) ON DELETE CASCADE,
-    user_id          BIGINT               NOT NULL REFERENCES user (id) ON DELETE CASCADE,
+    user_id          BIGINT               NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     title            VARCHAR(255)         NOT NULL,
     description      TEXT                 NOT NULL,
     status           research_task_status NOT NULL DEFAULT 'OPEN',
