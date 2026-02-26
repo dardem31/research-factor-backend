@@ -11,7 +11,7 @@ class TrackedParameter(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "research_id", nullable = false)
-    val research: Research,
+    var research: Research? = null,
 
     @Column(nullable = false)
     var name: String,

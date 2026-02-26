@@ -1,6 +1,6 @@
 package by.dardem.researchfactorbackend.service.domain.research_line.task
 
-import by.dardem.researchfactorbackend.domain.dto.research_line.task.ResearchTaskCreateDto
+import by.dardem.researchfactorbackend.domain.dto.research_line.task.ResearchTaskDto
 import by.dardem.researchfactorbackend.domain.entity.research_line.ResearchTask
 import by.dardem.researchfactorbackend.repository.entity.ResearchTaskRepository
 import by.dardem.researchfactorbackend.service.domain.base.BaseService
@@ -18,11 +18,11 @@ class ResearchTaskService(
     suspend fun existsByIdAndUserId(id: Long, userId: Long): Boolean =
         researchTaskRepository.existsByIdAndUserId(id, userId)
 
-    suspend fun createResearchTask(dto: ResearchTaskCreateDto, userId: Long): Long {
+    suspend fun createResearchTask(dto: ResearchTaskDto, userId: Long): Long {
         // Проверяем владение исследованием
         val isOwner = researchLineService.existsByIdAndUserId(dto.researchLineId, userId)
         if (!isOwner) {
-            throw ResponseStatusException(HttpStatus.FORBIDDEN, "You don't have permission to modify this research")
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "You don't have permission to modify this research")
         }
 
         val task = ResearchTask(

@@ -2,7 +2,7 @@ package by.dardem.researchfactorbackend.domain.dto.research_line.task
 
 import by.dardem.researchfactorbackend.domain.enums.ResearchTaskStatus
 
-data class ResearchTaskCreateDto(
+data class ResearchTaskDto(
     val researchLineId: Long,
     val title: String,
     val description: String,

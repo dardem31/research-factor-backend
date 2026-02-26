@@ -18,4 +18,11 @@ class ResearchRepositoryImpl(
                 builder.equal(root.get<Long>("userId"), userId)
             )
         }
+    override suspend fun findByIdAndUserId(id: Long, userId: Long): Research? =
+        find { root, builder ->
+            mutableListOf(
+                builder.equal(root.get<Long>("id"), id),
+                builder.equal(root.get<Long>("userId"), userId)
+            )
+        }
 }

@@ -11,11 +11,11 @@ class PrimaryOutcome(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "research_id", nullable = false)
-    val research: Research,
+    var research: Research? = null,
 
-    @Column(nullable = false)
-    var text: String,
+    @Column
+    var text: String? = null,
 
-    @Column(nullable = false)
-    var status: String = "DRAFT"
+    @Column
+    var status: String? = null
 )

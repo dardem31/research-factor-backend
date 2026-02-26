@@ -3,7 +3,7 @@ package by.dardem.researchfactorbackend.domain.dto.research_line
 import by.dardem.researchfactorbackend.domain.enums.ResearchLineStatus
 import java.time.Instant
 
-data class ResearchLineCreateDto(
+data class ResearchLineDto(
     val researchId: Long,
     val sequenceOrder: Int,
     val title: String,

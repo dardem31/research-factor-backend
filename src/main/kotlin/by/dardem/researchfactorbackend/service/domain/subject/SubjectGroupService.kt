@@ -22,7 +22,7 @@ class SubjectGroupService(
         // Проверяем владение исследованием через ResearchService
         val isOwner = researchService.existsByIdAndUserId(dto.researchId, userId)
         if (!isOwner) {
-            throw ResponseStatusException(HttpStatus.FORBIDDEN, "Research not found or you don't have permission")
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "Research not found or you don't have permission")
         }
 
         val group = SubjectGroup(

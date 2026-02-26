@@ -23,14 +23,14 @@ class LogEntryService(
     suspend fun createLogEntry(dto: LogEntryCreateDto, userId: Long): Long {
         // 1. Проверяем таску и владение ею
         if (!researchTaskService.existsByIdAndUserId(dto.taskId, userId)) {
-            throw ResponseStatusException(HttpStatus.FORBIDDEN, "Permission denied for task or task not found")
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "Permission denied for task or task not found")
         }
 
         // 2. Проверяем артефакты (если есть) на корректность владельца
         if (dto.artifactIds.isNotEmpty()) {
             for (artifactId in dto.artifactIds) {
                 if (!artifactService.existsByIdAndUserId(artifactId, userId)) {
-                    throw ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid artifacts or permission denied")
+                    throw ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid artifacts or permission denied")
                 }
             }
         }
@@ -39,7 +39,7 @@ class LogEntryService(
         for (updateDto in dto.subjectUpdates) {
             val subjectId = updateDto.subjectId
             if (!subjectService.existsByIdAndUserId(subjectId, userId)) {
-                throw ResponseStatusException(HttpStatus.FORBIDDEN, "Permission denied for subject $subjectId")
+                throw ResponseStatusException(HttpStatus.NOT_FOUND, "Permission denied for subject $subjectId")
             }
         }
 

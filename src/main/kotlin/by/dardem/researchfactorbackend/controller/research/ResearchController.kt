@@ -2,7 +2,7 @@ package by.dardem.researchfactorbackend.controller.research
 
 import by.dardem.researchfactorbackend.config.security.AuthenticatedUser
 import by.dardem.researchfactorbackend.domain.dto.filter.ResearchFilterDto
-import by.dardem.researchfactorbackend.domain.dto.research.ResearchCreateDto
+import by.dardem.researchfactorbackend.domain.dto.research.ResearchDto
 import by.dardem.researchfactorbackend.domain.dto.view.ResearchOverviewItem
 import by.dardem.researchfactorbackend.domain.util.CountSearchResultDto
 import by.dardem.researchfactorbackend.domain.util.SearchResultDto
@@ -18,13 +18,29 @@ class ResearchController(
     private val researchOverviewItemService: ResearchOverviewItemService
 ) {
 
+    @GetMapping("/api/v1/dashboard/research/{id}")
+    suspend fun getResearch(
+        @PathVariable id: Long,
+        @AuthenticationPrincipal user: AuthenticatedUser
+    ): ResponseEntity<ResearchDto> {
+        val result = researchService.getResearch(id, user.user.id)
+        return ResponseEntity.ok(result)
+    }
     @PostMapping("/api/v1/dashboard/research")
     suspend fun createResearch(
-        @RequestBody dto: ResearchCreateDto,
+        @RequestBody dto: ResearchDto,
         @AuthenticationPrincipal user: AuthenticatedUser
-    ): Map<String, Long> {
-        val researchId = researchService.createResearch(dto, user.user.id)
-        return mapOf("id" to researchId)
+    ): ResponseEntity<ResearchDto> {
+        val result = researchService.createResearch(dto, user.user.id)
+        return ResponseEntity.ok(result)
+    }
+    @PutMapping("/api/v1/dashboard/research")
+    suspend fun updateResearch(
+        @RequestBody dto: ResearchDto,
+        @AuthenticationPrincipal user: AuthenticatedUser
+    ): ResponseEntity<ResearchDto> {
+        val result = researchService.updateResearch(dto, user.user.id)
+        return ResponseEntity.ok(result)
     }
 
     @GetMapping("/api/v1/dashboard/research/list")

@@ -7,11 +7,11 @@ import jakarta.persistence.*
 class StudyProtocol(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    var id: Long? = null,
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "research_id", nullable = false)
-    val research: Research,
+    var research: Research? = null,
 
     @Column(name = "primary_outcome", nullable = false)
     var primaryOutcome: String,

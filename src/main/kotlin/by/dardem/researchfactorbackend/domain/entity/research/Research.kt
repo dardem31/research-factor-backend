@@ -1,6 +1,5 @@
 package by.dardem.researchfactorbackend.domain.entity.research
 
-import by.dardem.researchfactorbackend.domain.enums.BlindingType
 import by.dardem.researchfactorbackend.domain.enums.ResearchStatus
 import by.dardem.researchfactorbackend.domain.util.AuditableEntity
 import jakarta.persistence.*
@@ -13,7 +12,7 @@ class Research(
     val id: Long? = null,
 
     @Column("user_id")
-    val userId: Long,
+    var userId: Long? = 0,
 
     @Column(nullable = false)
     var title: String,
@@ -26,20 +25,28 @@ class Research(
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var status: ResearchStatus = ResearchStatus.DRAFT,
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "blinding_type", nullable = false)
-    var blindingType: BlindingType = BlindingType.OPEN,
-
+    var status: ResearchStatus? = ResearchStatus.DRAFT,
+) : AuditableEntity() {
     @OneToOne(mappedBy = "research", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-    var protocol: StudyProtocol? = null,
+    var protocol: StudyProtocol? = null
+        set(value) {
+            value?.let { it.research = this }
+            field = value
+        }
 
-    @OneToMany(mappedBy = "research", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-    var primaryOutcomes: MutableList<PrimaryOutcome> = mutableListOf(),
+    @OneToMany(mappedBy = "research", cascade = [CascadeType.ALL], fetch = FetchType.EAGER, orphanRemoval = true)
+    var primaryOutcomes: MutableList<PrimaryOutcome>? = mutableListOf()
+        set(value) {
+            value?.forEach { primaryOutcome -> primaryOutcome.research = this }
+            field = value
+        }
 
-    @OneToMany(mappedBy = "research", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-    var trackedParameters: MutableList<TrackedParameter> = mutableListOf()
-) : AuditableEntity()
+    @OneToMany(mappedBy = "research", cascade = [CascadeType.ALL], fetch = FetchType.EAGER, orphanRemoval = true)
+    var trackedParameters: MutableList<TrackedParameter>? = mutableListOf()
+        set(value) {
+            value?.forEach { trackedParameter -> trackedParameter.research = this }
+            field = value
+        }
+}
 
 

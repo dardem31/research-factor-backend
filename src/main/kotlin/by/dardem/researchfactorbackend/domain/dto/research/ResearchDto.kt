@@ -1,15 +1,17 @@
 package by.dardem.researchfactorbackend.domain.dto.research
 
-data class ResearchCreateDto(
+data class ResearchDto(
+    val id: Long,
     val title: String,
     val hypothesis: String,
     val description: String,
-    val protocol: ProtocolCreateDto,
-    val primaryOutcomes: List<PrimaryOutcomeCreateDto>,
-    val trackedParameters: List<TrackedParameterCreateDto>
+    val protocol: ProtocolDto,
+    val primaryOutcomes: List<PrimaryOutcomeDto>,
+    val trackedParameters: List<TrackedParameterDto>
 )
 
-data class ProtocolCreateDto(
+data class ProtocolDto(
+    val id: Long,
     val primaryOutcome: String,
     val sampleSizeJustification: String,
     val statisticalMethod: String,
@@ -21,11 +23,13 @@ data class ProtocolCreateDto(
     val earlyStoppingCriteria: String
 )
 
-data class PrimaryOutcomeCreateDto(
+data class PrimaryOutcomeDto(
+    val id: Long,
     val text: String
 )
 
-data class TrackedParameterCreateDto(
+data class TrackedParameterDto(
+    val id: Long,
     val name: String,
     val unit: String
 )

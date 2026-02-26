@@ -19,7 +19,7 @@ class SubjectService(
         // Проверяем владение группой через SubjectGroupService
         val isGroupOwner = subjectGroupService.existsByIdAndUserId(dto.groupId, userId)
         if (!isGroupOwner) {
-            throw ResponseStatusException(HttpStatus.FORBIDDEN, "Subject group not found or you don't have permission")
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "Subject group not found or you don't have permission")
         }
 
         val subject = Subject(

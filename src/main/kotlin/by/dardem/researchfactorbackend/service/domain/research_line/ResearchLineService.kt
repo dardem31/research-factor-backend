@@ -1,6 +1,6 @@
 package by.dardem.researchfactorbackend.service.domain.research_line
 
-import by.dardem.researchfactorbackend.domain.dto.research_line.ResearchLineCreateDto
+import by.dardem.researchfactorbackend.domain.dto.research_line.ResearchLineDto
 import by.dardem.researchfactorbackend.domain.entity.research_line.ResearchLine
 import by.dardem.researchfactorbackend.repository.entity.ResearchLineRepository
 import by.dardem.researchfactorbackend.service.domain.base.BaseService
@@ -15,12 +15,12 @@ class ResearchLineService(
     private val researchService: ResearchService
 ) : BaseService<ResearchLine, Long>(researchLineRepository) {
 
-    suspend fun createResearchLine(dto: ResearchLineCreateDto, userId: Long): Long {
+    suspend fun createResearchLine(dto: ResearchLineDto, userId: Long): Long {
         // Проверка прав собственности на Research
         val isOwner = researchService.existsByIdAndUserId(dto.researchId, userId)
 
         if (!isOwner) {
-            throw ResponseStatusException(HttpStatus.FORBIDDEN, "Research not found or you don't have permission")
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "Research not found or you don't have permission")
         }
 
         val researchLine = ResearchLine(
