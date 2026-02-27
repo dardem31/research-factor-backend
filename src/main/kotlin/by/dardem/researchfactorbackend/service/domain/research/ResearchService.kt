@@ -1,7 +1,6 @@
 package by.dardem.researchfactorbackend.service.domain.research
 
 import by.dardem.researchfactorbackend.domain.dto.mappers.PrimaryOutcomeMapper
-import by.dardem.researchfactorbackend.domain.dto.mappers.ProtocolMapper
 import by.dardem.researchfactorbackend.domain.dto.mappers.ResearchMapper
 import by.dardem.researchfactorbackend.domain.dto.mappers.TrackedParameterMapper
 import by.dardem.researchfactorbackend.domain.dto.research.ResearchDto
@@ -16,7 +15,6 @@ import org.springframework.web.server.ResponseStatusException
 class ResearchService(
     private val researchRepository: ResearchRepository,
     private val researchMapper: ResearchMapper,
-    private val protocolMapper: ProtocolMapper,
     private val primaryOutcomeMapper: PrimaryOutcomeMapper,
     private val trackedParameterMapper: TrackedParameterMapper
 ) : BaseService<Research, Long>(researchRepository) {
@@ -64,4 +62,11 @@ class ResearchService(
 
     suspend fun getResearch(id: Long, userId: Long) =
         researchRepository.findByIdAndUserId(id, userId)?.let(researchMapper::toDto) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Research not found")
+
+    suspend fun validateResearchOwnership(researchId: Long, userId: Long) {
+        val isOwner = existsByIdAndUserId(researchId, userId)
+        if (!isOwner) {
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "Research not found or you don't have permission")
+        }
+    }
 }

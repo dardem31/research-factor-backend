@@ -12,7 +12,7 @@ class ResearchLine(
     val id: Long? = null,
 
     @Column("user_id")
-    val userId: Long,
+    var userId: Long? = 0,
 
     @Column(name = "research_id", nullable = false)
     var researchId: Long,
@@ -28,7 +28,7 @@ class ResearchLine(
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var status: ResearchLineStatus = ResearchLineStatus.LOCKED,
+    var status: ResearchLineStatus? = ResearchLineStatus.LOCKED,
 
     @Column(name = "planned_start_date")
     var plannedStartDate: Instant? = null,

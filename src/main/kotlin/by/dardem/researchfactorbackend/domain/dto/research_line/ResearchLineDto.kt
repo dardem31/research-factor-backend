@@ -4,6 +4,7 @@ import by.dardem.researchfactorbackend.domain.enums.ResearchLineStatus
 import java.time.Instant
 
 data class ResearchLineDto(
+    var id: Long? = 0,
     val researchId: Long,
     val sequenceOrder: Int,
     val title: String,

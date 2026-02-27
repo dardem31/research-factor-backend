@@ -7,22 +7,22 @@ models:
     provider: openrouter
     model: anthropic/claude-sonnet-4.5
     apiBase: https://openrouter.ai/api/v1
-    apiKey: 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
+    apiKey: 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
   - name: google/gemini-3-flash-preview
     provider: openrouter
     model: google/gemini-3-flash-preview
     apiBase: https://openrouter.ai/api/v1
-    apiKey: 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
+    apiKey: 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
   - name: moonshotai/kimi-k2.5
     provider: openrouter
     model: moonshotai/kimi-k2.5
     apiBase: https://openrouter.ai/api/v1
-    apiKey: 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
+    apiKey: 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
   - name: anthropic/claude-opus-4.6
     provider: openrouter
     model: anthropic/claude-opus-4.6
     apiBase: https://openrouter.ai/api/v1
-    apiKey: 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
+    apiKey: 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
     timeout: 600000
 
   - name: qwen2.5-coder 1.5b
@@ -55,7 +55,7 @@ tabAutocompleteModel:
   provider: openrouter
   model: liquid/lfm-2.5-1.2b-thinking:free
   apiBase: https://openrouter.ai/api/v1
-  apiKey: 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
+  apiKey: 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
 
 tabAutocompleteOptions:
   maxPromptTokens: 1024
@@ -67,7 +67,7 @@ embeddingsProvider:
   provider: openai
   model: text-embedding-3-small
   apiBase: https://openrouter.ai/api/v1
-  apiKey: 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
+  apiKey: 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
 
 # Настройки reranker для улучшения контекста
 reranker:
