@@ -53,7 +53,7 @@ class ResearchLineService(
     suspend fun existsByIdAndUserId(id: Long, userId: Long) =
         researchLineRepository.existsByIdAndUserId(id, userId)
 
-    private suspend fun validateResearchLineOwnership(researchLineId: Long, userId: Long) {
+    suspend fun validateResearchLineOwnership(researchLineId: Long, userId: Long) {
         val exists = researchLineRepository.existsByIdAndUserId(researchLineId, userId)
         if (!exists) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, "Research line not found")

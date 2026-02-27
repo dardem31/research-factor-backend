@@ -30,6 +30,7 @@ out/
 /nbproject/private/
 /nbbuild/
 /dist/
+/.continue/
 /nbdist/
 /.nb-gradle/
 
