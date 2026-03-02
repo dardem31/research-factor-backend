@@ -21,6 +21,7 @@ abstract class AuditableEntity {
 
     @PrePersist
     fun prePersist() {
+        this.updatedAt = Instant.now()
         this.createdAt = Instant.now()
     }
 

@@ -35,3 +35,9 @@ CREATE TABLE task_artifacts
     artifact_id BIGINT NOT NULL REFERENCES artifacts (id) ON DELETE CASCADE,
     PRIMARY KEY (task_id, artifact_id)
 );
+
+--changeset Roman_Lukashenko:artifact-task-id
+ALTER TABLE artifacts ADD task_id BIGINT NOT NULL REFERENCES research_tasks (id) ON DELETE CASCADE
+--changeset Roman_Lukashenko:artifact-updated_at
+ALTER TABLE artifacts
+    ADD updated_at TIMESTAMP NOT NULL DEFAULT NOW()

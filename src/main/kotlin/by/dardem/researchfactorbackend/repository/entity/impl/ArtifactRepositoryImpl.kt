@@ -18,4 +18,29 @@ class ArtifactRepositoryImpl(
                 builder.equal(root.get<Long>("userId"), userId)
             )
         }
+
+    override suspend fun findByIdAndUserId(id: Long, userId: Long): Artifact? =
+        find { root, builder ->
+            mutableListOf(
+                builder.equal(root.get<Long>("id"), id),
+                builder.equal(root.get<Long>("userId"), userId)
+            )
+        }
+
+    override suspend fun findAllByTaskIdAndUserId(taskId: Long, userId: Long): List<Artifact> =
+        findList { root, builder ->
+            mutableListOf(
+                builder.equal(root.get<Long>("taskId"), taskId),
+                builder.equal(root.get<Long>("userId"), userId)
+            )
+        }
+
+    override suspend fun deleteByIdAndUserId(id: Long, userId: Long) {
+        delete { root, builder ->
+            mutableListOf(
+                builder.equal(root.get<Long>("id"), id),
+                builder.equal(root.get<Long>("userId"), userId)
+            )
+        }
+    }
 }

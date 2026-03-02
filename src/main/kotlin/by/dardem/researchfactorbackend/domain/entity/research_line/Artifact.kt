@@ -1,15 +1,8 @@
 package by.dardem.researchfactorbackend.domain.entity.research_line
 
 import by.dardem.researchfactorbackend.domain.enums.ArtifactType
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
-import java.time.Instant
+import by.dardem.researchfactorbackend.domain.util.AuditableEntity
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "artifacts")
@@ -19,21 +12,21 @@ class Artifact(
     val id: Long? = null,
 
     @Column("user_id")
-    val userId: Long,
+    var userId: Long? = 0,
+
+    @Column("task_id")
+    var taskId: Long? = 0,
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     var type: ArtifactType,
 
     @Column(name = "storage_url", nullable = false)
-    var storageUrl: String,
+    var storageUrl: String? = null,
 
     @Column(nullable = false)
-    var sha256: String,
+    var sha256: String? = null,
 
     @Column(columnDefinition = "jsonb")
     var metadata: String? = null,
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    var createdAt: Instant = Instant.now()
-)
+) : AuditableEntity()

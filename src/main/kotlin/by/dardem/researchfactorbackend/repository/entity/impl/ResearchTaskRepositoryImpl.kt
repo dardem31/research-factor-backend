@@ -18,4 +18,29 @@ class ResearchTaskRepositoryImpl(
                 builder.equal(root.get<Long>("userId"), userId)
             )
         }
+
+    override suspend fun findByIdAndUserId(id: Long, userId: Long): ResearchTask? =
+        find { root, builder ->
+            mutableListOf(
+                builder.equal(root.get<Long>("id"), id),
+                builder.equal(root.get<Long>("userId"), userId)
+            )
+        }
+
+    override suspend fun findAllByResearchLineIdAndUserId(researchLineId: Long, userId: Long): List<ResearchTask> =
+        findList { root, builder ->
+            mutableListOf(
+                builder.equal(root.get<Long>("researchLineId"), researchLineId),
+                builder.equal(root.get<Long>("userId"), userId)
+            )
+        }
+
+    override suspend fun deleteByIdAndUserId(id: Long, userId: Long) {
+        delete { root, builder ->
+            mutableListOf(
+                builder.equal(root.get<Long>("id"), id),
+                builder.equal(root.get<Long>("userId"), userId)
+            )
+        }
+    }
 }

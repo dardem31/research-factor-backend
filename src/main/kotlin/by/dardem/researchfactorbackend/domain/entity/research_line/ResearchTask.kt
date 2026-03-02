@@ -11,7 +11,7 @@ class ResearchTask(
     val id: Long? = null,
 
     @Column("user_id")
-    val userId: Long,
+    var userId: Long? = 0,
 
     @Column(name = "research_line_id", nullable = false)
     var researchLineId: Long,
