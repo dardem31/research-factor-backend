@@ -12,6 +12,5 @@ interface PrimaryOutcomeMapper {
     fun toDto(entity: PrimaryOutcome): PrimaryOutcomeDto
 
     @Mapping(target = "research", ignore = true)
-    @Mapping(target = "status", ignore = true)
     fun toEntity(dto: PrimaryOutcomeDto): PrimaryOutcome
 }

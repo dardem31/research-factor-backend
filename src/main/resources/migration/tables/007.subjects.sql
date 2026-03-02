@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset Roman_Lukashenko:3-create-subject-tables
+--changeset Roman_Lukashenko:3-create-subjects-table
 CREATE TYPE subject_status AS ENUM ('ACTIVE', 'WITHDRAWN', 'EXCLUDED');
 
 CREATE TABLE subjects
@@ -13,13 +13,4 @@ CREATE TABLE subjects
     withdrawal_date   TIMESTAMP,
     created_at        TIMESTAMP    NOT NULL DEFAULT NOW(),
     updated_at        TIMESTAMP    NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE parameter_fields
-(
-    id            BIGSERIAL PRIMARY KEY,
-    subject_id    BIGINT    NOT NULL REFERENCES subjects (id) ON DELETE CASCADE,
-    parameter_id  BIGINT    NOT NULL REFERENCES tracked_parameters (id),
-    current_value NUMERIC   NOT NULL,
-    updated_at    TIMESTAMP NOT NULL DEFAULT NOW()
 );

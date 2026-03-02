@@ -5,13 +5,32 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <include file="migration/tables/001.users-table.sql" />
-    <include file="migration/tables/002.research-core-tables.sql" />
-    <include file="migration/tables/003.subjects-tables.sql" />
-    <include file="migration/tables/004.research-line-tables.sql" />
-    <include file="migration/tables/005.execution-and-artifacts.sql" />
-    <include file="migration/tables/006.objectives-and-reports.sql" />
-    <include file="migration/tables/007.adverse-events-and-audit.sql" />
+    <include file="migration/tables/001.users.sql" />
+    <include file="migration/tables/002.research.sql" />
+    <include file="migration/tables/003.study_protocols.sql" />
+    <include file="migration/tables/004.primary_outcomes.sql" />
+    <include file="migration/tables/005.subject_groups.sql" />
+    <include file="migration/tables/006.tracked_parameters.sql" />
+    <include file="migration/tables/007.subjects.sql" />
+    <include file="migration/tables/008.parameter_fields.sql" />
+    <include file="migration/tables/009.research_lines.sql" />
+    <include file="migration/tables/010.stage_questions.sql" />
+    <include file="migration/tables/011.research_tasks.sql" />
+    <include file="migration/tables/012.task_target_groups.sql" />
+    <include file="migration/tables/013.artifacts.sql" />
+    <include file="migration/tables/014.log_entries.sql" />
+    <include file="migration/tables/015.log_entry_artifacts.sql" />
+    <include file="migration/tables/016.task_artifacts.sql" />
+    <include file="migration/tables/017.objectives.sql" />
+    <include file="migration/tables/018.stage_question_answers.sql" />
+    <include file="migration/tables/019.objective_reviews.sql" />
+    <include file="migration/tables/020.research_reports.sql" />
+    <include file="migration/tables/021.primary_outcome_answers.sql" />
+    <include file="migration/tables/022.report_reviews.sql" />
+    <include file="migration/tables/023.adverse_events.sql" />
+    <include file="migration/tables/024.audit_entries.sql" />
+    <include file="migration/tables/025.subject_updates.sql" />
+    <include file="migration/tables/026.parameter_changes.sql" />
 
     <!-- ChangeSet for ALL the VIEWS to make sure that data structure is not broken  -->
     <changeSet id="views-observer" author="Roman Lukashenko" runAlways="true">

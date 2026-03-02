@@ -5,6 +5,7 @@ import by.dardem.researchfactorbackend.domain.dto.mappers.ResearchMapper
 import by.dardem.researchfactorbackend.domain.dto.mappers.TrackedParameterMapper
 import by.dardem.researchfactorbackend.domain.dto.research.ResearchDto
 import by.dardem.researchfactorbackend.domain.entity.research.Research
+import by.dardem.researchfactorbackend.domain.enums.ResearchStatus
 import by.dardem.researchfactorbackend.repository.entity.ResearchRepository
 import by.dardem.researchfactorbackend.service.domain.base.BaseService
 import org.springframework.http.HttpStatus
@@ -23,7 +24,8 @@ class ResearchService(
         researchRepository.existsByIdAndUserId(id, userId)
 
     suspend fun createResearch(dto: ResearchDto, userId: Long): ResearchDto {
-        val research = toEntity(dto)
+        val research = toEntity(dto, userId)
+        research.status = ResearchStatus.DRAFT
         val savedResearch = save(research)
         return researchMapper.toDto(savedResearch)
     }
@@ -52,7 +54,7 @@ class ResearchService(
         val savedResearch = saveOrUpdate(research)
         return researchMapper.toDto(savedResearch)
     }
-    private fun toEntity(dto: ResearchDto): Research =
+    private fun toEntity(dto: ResearchDto, userId: Long): Research =
         researchMapper.toEntity(dto).apply {
             this.userId = userId
             protocol?.research = this

@@ -7,7 +7,7 @@ import jakarta.persistence.*
 class TrackedParameter(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    var id: Long? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "research_id", nullable = false)

@@ -9,7 +9,7 @@ import jakarta.persistence.*
 class Research(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    var id: Long? = null,
 
     @Column("user_id")
     var userId: Long? = 0,
